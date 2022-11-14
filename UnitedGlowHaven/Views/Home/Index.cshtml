@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container p-5">
+    <div class="row">
+        <div class="col-sm">
+            <ul class="list-group bg-transparent">
+                <a class="list-group-item list-group-item-action bg-transparent" asp-controller="home" asp-action="Index">broeken</a>
+                <a class="list-group-item list-group-item-action bg-transparent" asp-controller="home" asp-action="Index">t-shirts</a>
+                <a class="list-group-item list-group-item-action bg-transparent" asp-controller="home" asp-action="Index">rokken</a>
+                <a class="list-group-item list-group-item-action bg-transparent" asp-controller="home" asp-action="Index">kleedjes</a>
+                <a class="list-group-item list-group-item-action bg-transparent" asp-controller="home" asp-action="Index">jassen</a>
+                <a class="list-group-item list-group-item-action bg-transparent" asp-controller="home" asp-action="Index">truien</a>
+            </ul>
+        </div>
+        <div class="col-sm">
+            <img src="~/images/UGHbanner.png"/>
+        </div>
+    </div>
+</div>
+
+<div class="container p-5 bg-custom-lighter">
+    <div class="row">
+        <h3 class="custom-text-color mb-4">Meest Verkocht</h3>
+    </div>
+    <div class="row">
+        @for (int i = 0; i < 8; i++)
+        {
+            <div class="card bg-custom-lighter p-2" style="width: 16rem; height: 28rem;">
+                <img class="card-img-top" src="~/images/tshirt.jpg" alt="Card image cap" style="height:20rem">
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item bg-custom-lighter list-group-item-product">T-shirt - zwart</li>
+                        <li class="list-group-item bg-custom-lighter list-group-item-product">Prijs</li>
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

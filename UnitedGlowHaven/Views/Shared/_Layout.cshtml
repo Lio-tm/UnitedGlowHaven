@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UnitedGlowHaven - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/ugh.css" />
+</head>
+
+
+<body class="bg-primary">
+    <header>
+        <nav class="navbar">
+        <div class="container border-bottom"> 
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <img src="~/images/UGHlogo.png" width="150" height="150" alt="Logo UGH">
+            </a>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            </form>
+        </div>
+        </nav>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-custom bg-primary">
+            <div class="container border-bottom">
+                <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarCustom">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse" id="navbarCustom">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="home" asp-action="Index">home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="over" asp-action="Index">over</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="broeken" asp-action="Index">broeken</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="t-shirts" asp-action="Index">t-shirts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="rokken" asp-action="Index">rokken</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="kleedjes" asp-action="Index">kleedjes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="jassen" asp-action="Index">jassen</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="truien" asp-action="Index">truien</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+        
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - UnitedGlowHaven - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
