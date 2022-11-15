@@ -34,3 +34,5 @@ C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp
 C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\UnitedGlowHaven.pdb
 C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\UnitedGlowHaven.genruntimeconfig.cache
 C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\UnitedGlowHaven.csproj.CopyComplete
+C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Product\Index.cshtml.g.cs
+C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Product\Details.cshtml.g.cs

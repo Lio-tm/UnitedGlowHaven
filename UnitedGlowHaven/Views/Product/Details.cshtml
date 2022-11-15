@@ -1,0 +1,16 @@
+﻿@model UnitedGlowHaven.ViewModels.ProductDetailsViewModel
+
+<h1>@Model.Naam</h1>
+
+<div class="card bg-custom-lighter p-2" style="height: 28rem;">
+        <img class="card-img-top" src="@Model.Afbeelding" alt="Card image cap" style="height:20rem">
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item bg-custom-lighter list-group-item-product">Productnummer : @Model.ProductNummer</li>
+            <li class="list-group-item bg-custom-lighter list-group-item-product">Prijs : @Model.Prijs €</li>
+                <li class="list-group-item bg-custom-lighter list-group-item-product">Beschrijving : @Model.Beschrijving</li>
+            </ul>
+        </div>
+</div>
+
+@Html.ActionLink("Terug", "Index", "Product");

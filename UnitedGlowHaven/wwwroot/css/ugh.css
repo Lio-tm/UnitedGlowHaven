@@ -57,8 +57,16 @@ input[type="color"]:focus,
     outline: 0 none;
 }
 
-.list-group-item-product{
-    border:0;
+.list-group-item-product {
+    border: 0;
+    color: #484040;
+}
+    
+.list-group-item-product.active,
+.list-group-item-product:hover 
+{
+     text-decoration: underline;
+     color: #484040;
 }
 
 
