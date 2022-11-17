@@ -7,6 +7,7 @@ namespace UnitedGlowHaven.Models
 {
     public class Product
     {
+        [Key]
         public int ProductId { get; set; }
         [Required]
         public string Naam { get; set; }
@@ -17,8 +18,10 @@ namespace UnitedGlowHaven.Models
         public string Afbeelding { get; set; }
         [Required]
         public string ProductNummer { get; set; }
+        [Required]
         public int KleurId { get; set; }
         public Kleur Kleur { get; set; }
+        [Required]
         public int CategorieId { get; set; }
         public Categorie Categorie { get; set; }
         public ICollection<ProductMaat> ProductMaten { get; set; }
