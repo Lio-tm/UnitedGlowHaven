@@ -5,33 +5,45 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using UnitedGlowHaven.Data;
 using UnitedGlowHaven.Models;
+using UnitedGlowHaven.ViewModels;
 
 namespace UnitedGlowHaven.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly UnitedGlowHavenContext _context;
+        public HomeController(UnitedGlowHavenContext context)
         {
-            _logger = logger;
+
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            ProductListViewModel vm = new ProductListViewModel()
+            {
+                Producten = _context.Producten.ToList(),
+            };
+            return View(vm);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Details(int id)
         {
-            return View();
-        }
+            Product product = _context.Producten.Where(p => p.ProductId == id).FirstOrDefault();
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ProductDetailsViewModel vm = new ProductDetailsViewModel()
+            {
+                Naam = product.Naam,
+                Prijs = product.Prijs,
+                Beschrijving = product.Beschrijving,
+                Afbeelding = product.Afbeelding,
+                ProductId = product.ProductId,
+                ProductNummer = product.ProductNummer,
+            };
+            return View(vm);
         }
     }
 }
+

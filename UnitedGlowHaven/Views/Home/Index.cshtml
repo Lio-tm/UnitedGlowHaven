@@ -1,4 +1,5 @@
-﻿@{
+﻿@model UnitedGlowHaven.ViewModels.ProductListViewModel;
+@{
     ViewData["Title"] = "Home";
 }
 
@@ -25,15 +26,15 @@
         <h3 class="custom-text-color mb-4">Meest Verkocht</h3>
     </div>
     <div class="row">
-        @for (int i = 0; i < 8; i++)
+        @foreach(var product in Model.Producten)
         {
             <div class="card bg-custom-lighter p-2" style="width: 16rem; height: 28rem;">
-                <a href="#">
-                <img class="card-img-top" src="~/images/tshirt.jpg" alt="Card image cap" style="height:20rem">
+                <a asp-controller="product" asp-action="details" asp-route-id="@product.ProductId">
+                <img class="card-img-top" src="@product.Afbeelding" alt="Card image cap" style="height:20rem">
                 <div class="card-body">
                     <ul class="list-group">
-                        <li class="list-group-item bg-custom-lighter list-group-item-product">T-shirt - zwart</li>
-                        <li class="list-group-item bg-custom-lighter list-group-item-product">Prijs</li>
+                        <li class="list-group-item bg-custom-lighter list-group-item-product">@product.Naam</li>
+                        <li class="list-group-item bg-custom-lighter list-group-item-product">Prijs: @product.Prijs</li>
                     </ul>
                 </div>
                 </a>
