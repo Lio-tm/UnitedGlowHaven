@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using UnitedGlowHaven.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using UnitedGlowHaven.Areas.Identity.Data;
 
 namespace UnitedGlowHaven.Data
 {
-    public class UnitedGlowHavenContext : DbContext
+    public class UnitedGlowHavenContext : IdentityDbContext<CustomUser>
     {
         public UnitedGlowHavenContext(DbContextOptions<UnitedGlowHavenContext> option) : base(option)
         {
@@ -20,6 +23,8 @@ namespace UnitedGlowHaven.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Categorie>().ToTable("Categorie");
             modelBuilder.Entity<Klant>().ToTable("Klant");
             modelBuilder.Entity<Kleur>().ToTable("Kleur");
