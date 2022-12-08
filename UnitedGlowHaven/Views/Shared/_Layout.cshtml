@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@*@model UnitedGlowHaven.ViewModels.CategorieViewModel;*@
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -49,10 +52,10 @@
                             <a class="nav-link" asp-controller="about" asp-action="Index">over</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="categorie" asp-action="broeken">broeken</a>
+                            <a class="nav-link" asp-controller="categorie" asp-action="Index">broeken</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="categorie" asp-action="t-shirts">t-shirts</a>
+                            <a class="nav-link" asp-controller="categorie" asp-action="Index" asp-route-id=2>t-shirts</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="categorie" asp-action="rokken">rokken</a>

@@ -1,0 +1,21 @@
+﻿@model UnitedGlowHaven.ViewModels.ProductListViewModel;
+
+
+<div class="container p-5 bg-custom-lighter">
+    <div class="row">
+        @foreach (var product in Model.Producten)
+        {
+            <div class="card bg-custom-lighter p-2" style="width: 16rem; height: 28rem;">
+                <a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId">
+                    <img class="card-img-top" src="@product.Afbeelding" alt="Card image cap" style="height:20rem">
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item bg-custom-lighter list-group-item-product">@product.Naam</li>
+                            <li class="list-group-item bg-custom-lighter list-group-item-product">@product.Prijs</li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>

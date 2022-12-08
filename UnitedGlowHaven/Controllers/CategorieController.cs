@@ -7,26 +7,27 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using UnitedGlowHaven.Data;
-using UnitedGlowHaven.Data.Repositories;
 using UnitedGlowHaven.Data.UnitOfWork;
 using UnitedGlowHaven.Models;
 using UnitedGlowHaven.ViewModels;
 
 namespace UnitedGlowHaven.Controllers
 {
-    public class HomeController : Controller
+    public class CategorieController : Controller
     {
         private readonly IUnitOfWork _uow;
-        public HomeController(IUnitOfWork unitOfWork)
+        public CategorieController(IUnitOfWork uow)
         {
-            _uow = unitOfWork;
+            _uow = uow;
         }
 
-        public async Task<ActionResult<IEnumerable<Product>>> Index()
+        public async Task<ActionResult<IEnumerable<Product>>> Index(int id)
         {
             ProductListViewModel vm = new ProductListViewModel()
             {
-                Producten = await _uow.ProductRepository.GetAll().ToListAsync()
+               Producten = await _uow.ProductRepository.GetAll()
+               .Where(p => p.CategorieId == id)
+                .ToListAsync()
             };
             return View(vm);
         }

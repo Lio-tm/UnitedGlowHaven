@@ -12,6 +12,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnitedGlowHaven.Areas.Identity.Data;
 using UnitedGlowHaven.Data;
+using UnitedGlowHaven.Data.Repositories;
+using UnitedGlowHaven.Data.UnitOfWork;
+using UnitedGlowHaven.Models;
 
 namespace UnitedGlowHaven
 {
@@ -33,6 +36,9 @@ namespace UnitedGlowHaven
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<UnitedGlowHavenContext>();
             services.AddRazorPages();
+            services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
