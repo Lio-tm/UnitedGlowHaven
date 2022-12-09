@@ -5,8 +5,16 @@ namespace UnitedGlowHaven.Areas.Identity.Data
     public class CustomUser: IdentityUser
     {
         [PersonalData]
-        public string Naam { get; set; }
+        public string Voornaam { get; set; }
         [PersonalData]
-        public string Email { get; set; }
+        public string Achternaam { get; set; }
+        [PersonalData]
+        public string Straat { get; set; }
+        [PersonalData]
+        public int Huisnummer { get; set; }
+        [PersonalData]
+        public string Postocde { get; set; }
+        [PersonalData]
+        public string Gemeente { get; set; }
     }
 }
