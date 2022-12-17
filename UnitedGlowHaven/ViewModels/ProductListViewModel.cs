@@ -5,6 +5,7 @@ namespace UnitedGlowHaven.ViewModels
 {
     public class ProductListViewModel
     {
+        public string ProductSearch { get; set; }
         public List<Product> Producten { get; set; }
     }
 }

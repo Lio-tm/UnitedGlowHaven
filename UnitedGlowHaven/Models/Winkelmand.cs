@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using UnitedGlowHaven.Areas.Identity.Data;
 
 namespace UnitedGlowHaven.Models
 {
@@ -10,8 +11,9 @@ namespace UnitedGlowHaven.Models
         [Required]
         public bool Afgerekend { get; set; }
         [Required]
-        public int KlantId { get; set; }
-        public Klant klant { get; set; }
-        public ICollection<WinkelmandProduct> WinkelmandProducten { get; set; }
+        public decimal Totaal { get; set; }
+        public string CustomUserId { get; set; }
+        public CustomUser CustomUser { get; set; }
+        public List<WinkelmandProduct> WinkelmandProducten { get; set; }
     }
 }

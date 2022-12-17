@@ -9,9 +9,33 @@ namespace UnitedGlowHaven.Data.UnitOfWork
         private readonly UnitedGlowHavenContext _context;
         private IGenericRepository<Product> _productRepository;
         private IGenericRepository<Categorie> _categorieRepository;
+        private IGenericRepository<Winkelmand> _winkelmandRepository;
+        private IGenericRepository<WinkelmandProduct> _winkelmandProductRepository;
         public UnitOfWork(UnitedGlowHavenContext context)
         {
             _context = context;
+        }
+        public IGenericRepository<WinkelmandProduct> WinkelmandProductRepository
+        {
+            get
+            {
+                if (this._winkelmandProductRepository == null)
+                {
+                    this._winkelmandProductRepository = new GenericRepository<WinkelmandProduct>(_context);
+                }
+                return _winkelmandProductRepository;
+            }
+        }
+        public IGenericRepository<Winkelmand> WinkelmandRepository
+        {
+            get
+            {
+                if (this._winkelmandRepository == null)
+                {
+                    this._winkelmandRepository = new GenericRepository<Winkelmand>(_context);
+                }
+                return _winkelmandRepository;
+            }
         }
 
         public IGenericRepository<Product> ProductRepository

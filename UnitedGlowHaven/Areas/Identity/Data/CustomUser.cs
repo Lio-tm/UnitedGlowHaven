@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using UnitedGlowHaven.Models;
 
 namespace UnitedGlowHaven.Areas.Identity.Data
 {
@@ -16,5 +18,6 @@ namespace UnitedGlowHaven.Areas.Identity.Data
         public string Postocde { get; set; }
         [PersonalData]
         public string Gemeente { get; set; }
+        public ICollection<Winkelmand> Winkelmand { get; set; }
     }
 }

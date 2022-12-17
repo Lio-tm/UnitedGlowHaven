@@ -38,7 +38,6 @@ namespace UnitedGlowHaven
             services.AddRazorPages();
             services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

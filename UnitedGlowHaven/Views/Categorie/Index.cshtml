@@ -2,7 +2,13 @@
 
 
 <div class="container p-5 bg-custom-lighter">
+    <h3>ALLES</h3>
     <div class="row">
+        
+        @if (Model.Producten.Count <= 0)
+        {            
+              <p>Geen producten in deze categorie gevonden</p>
+        }
         @foreach (var product in Model.Producten)
         {
             <div class="card bg-custom-lighter p-2" style="width: 16rem; height: 28rem;">

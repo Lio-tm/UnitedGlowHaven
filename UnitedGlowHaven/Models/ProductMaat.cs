@@ -10,6 +10,7 @@ namespace UnitedGlowHaven.Models
         public int ProductId { get; set; }
         [Required]
         public int MaatId { get; set; }
+        public int Aantal { get; set; }
         public Product Product { get; set; }
         public Maat Maat { get; set; }
     }

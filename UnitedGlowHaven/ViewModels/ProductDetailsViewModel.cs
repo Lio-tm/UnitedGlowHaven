@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System;
+using UnitedGlowHaven.Models;
+using System.Collections.Generic;
 
 namespace UnitedGlowHaven.ViewModels
 {
@@ -9,11 +11,14 @@ namespace UnitedGlowHaven.ViewModels
         
         public string Naam { get; set; }
         public string Beschrijving { get; set; }
-        
-        public Decimal Prijs { get; set; }
+        [DataType(DataType.Currency)]
+        public decimal Prijs { get; set; }
         
         public string Afbeelding { get; set; }
+        public Kleur Kleur { get; set; }
+        public Categorie Categorie { get; set; }
         
         public string ProductNummer { get; set; }
+        public ICollection<ProductMaat> ProductMaten { get; set; }
     }
 }

@@ -15,8 +15,24 @@
                 <li class="list-group-item bg-custom-lighter list-group-item-product">Productnummer : @Model.ProductNummer</li>
                 <li class="list-group-item bg-custom-lighter list-group-item-product">Prijs : @Model.Prijs €</li>
                 <li class="list-group-item bg-custom-lighter list-group-item-product">Beschrijving : @Model.Beschrijving</li>
+                <li class="list-group-item bg-custom-lighter list-group-item-product">Kleur : @Model.Kleur.Naam</li>
+                <div class="dropdown show">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Maat
+                    </a>
+                    
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        @foreach (var productmaat in Model.ProductMaten)
+                        {
+                            <a class="dropdown-item" href="#">@productmaat.Maat.Naam</a>
+                        }
+                    </div>
+                </div>
             </ul>
-            @*<a href="#" class="btn btn-primary">BUTTON</a>*@
+            <form asp-controller="Winkelmand" asp-action="NieuwWinkelmandProduct">
+                <input type="hidden" asp-for="ProductId"/>
+                <input type="submit" value="kopen" class="btn btn-primary"/>
+            </form>
         </div>
             
         </div>

@@ -203,3 +203,13 @@ C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp
 C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Categorie\Index.cshtml.g.cs
+C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Gebruiker\Index.cshtml.g.cs
+C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Gebruiker\Create.cshtml.g.cs
+C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Gebruiker\Delete.cshtml.g.cs
+C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Gebruiker\Edit.cshtml.g.cs
+C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Producten.cshtml.g.cs
+C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ProductDetails.cshtml.g.cs
+C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ProductCreate.cshtml.g.cs
+C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditProduct.cshtml.g.cs
+C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Winkelmand\Index.cshtml.g.cs
+C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Winkelmand\LegeWinkelmand.cshtml.g.cs
