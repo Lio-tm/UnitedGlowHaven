@@ -38,7 +38,7 @@ namespace UnitedGlowHaven.Controllers
                 return RedirectToAction(nameof(LegeWinkelmand));
             };
 
-             List<WinkelmandProduct> winkelmandProducten = await _uow.WinkelmandProductRepository.GetAll()
+            List<WinkelmandProduct> winkelmandProducten = await _uow.WinkelmandProductRepository.GetAll()
             .Include(w => w.Product)
             .Where(w => w.WinkelmandId == winkelmand.WinkelmandId)
             .ToListAsync();
@@ -66,27 +66,54 @@ namespace UnitedGlowHaven.Controllers
             CustomUser user = await _userManager.GetUserAsync(HttpContext.User);
             Winkelmand winkelmand = await _context.Winkelmand.Where(w => w.CustomUserId == user.Id && w.Afgerekend == false).FirstOrDefaultAsync();
             Product product = await _uow.ProductRepository.GetById(vm.ProductId);
+            WinkelmandProduct winkelmandProduct = await _context.WinkelmandProducten.Where(w => w.ProductId == product.ProductId && w.WinkelmandId == winkelmand.WinkelmandId).FirstOrDefaultAsync();
+            
 
             if (winkelmand == null)
             {
                 winkelmand = new Winkelmand()
                 {
-                    Totaal = product.Prijs,
+                    Totaal = 0,
                     CustomUserId = user.Id,
                     Afgerekend = false
                 };
                 _uow.WinkelmandRepository.Create(winkelmand);
                 await _uow.Save();
             }
-            _uow.WinkelmandProductRepository.Create(new WinkelmandProduct()
+            if (winkelmandProduct == null)
             {
-                Aantal = 1,
-                Prijs = product.Prijs,
-                ProductId = product.ProductId,
-                WinkelmandId = winkelmand.WinkelmandId,
-            });
+                winkelmandProduct = new WinkelmandProduct()
+                {
+                    Aantal = 1,
+                    Prijs = product.Prijs,
+                    ProductId = product.ProductId,
+                    WinkelmandId = winkelmand.WinkelmandId,
+                    SubTotaal = product.Prijs * 1
+                };
+                _uow.WinkelmandProductRepository.Create(winkelmandProduct);
+                
+            }
+            else
+            {
+                winkelmandProduct.Aantal += 1;
+                winkelmandProduct.SubTotaal = product.Prijs * winkelmandProduct.Aantal;
+                _uow.WinkelmandProductRepository.Update(winkelmandProduct);
+            }
             await _uow.Save();
+            winkelmand.Totaal += winkelmandProduct.SubTotaal;
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<ActionResult> DeleteProductFromShoppingcart(int id)
+        {
+            WinkelmandProduct winkelmandProduct = await _uow.WinkelmandProductRepository.GetById(id);
+
+            if (winkelmandProduct == null) return NotFound();
+
+            _uow.WinkelmandProductRepository.Delete(winkelmandProduct);
+            await _uow.Save();
+
+            return RedirectToAction("Index");
         }
 
     }

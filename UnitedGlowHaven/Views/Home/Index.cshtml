@@ -30,7 +30,7 @@
         {
             <div class="card bg-custom-lighter p-2" style="width: 16rem; height: 28rem;">
                 <a asp-controller="product" asp-action="details" asp-route-id="@product.ProductId">
-                <img class="card-img-top" src="@product.Afbeelding" alt="Card image cap" style="height:20rem">
+                <img class="card-img-top" src="~/images/@product.Afbeelding" alt="Card image cap" style="height:20rem">
                 <div class="card-body">
                     <ul class="list-group">
                         <li class="list-group-item bg-custom-lighter list-group-item-product">@product.Naam</li>

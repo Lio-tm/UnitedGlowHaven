@@ -51,6 +51,12 @@ namespace UnitedGlowHaven.Controllers
                 .Where(p => p.ProductId == id)
                 .ToListAsync();
 
+            List<ProductMaat> productmaten = await _uow.ProductMaatRepository.GetAll()
+               .Include(p => p.Maat)
+               .Where(p => p.ProductId == id)
+               .Include(p => p.Aantal)
+               .ToListAsync();
+
             if (product != null)
             {
                 ProductDetailsViewModel vm = new ProductDetailsViewModel()

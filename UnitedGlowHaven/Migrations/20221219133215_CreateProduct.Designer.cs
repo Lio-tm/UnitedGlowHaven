@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UnitedGlowHaven.Data;
 
 namespace UnitedGlowHaven.Migrations
 {
     [DbContext(typeof(UnitedGlowHavenContext))]
-    partial class UnitedGlowHavenContextModelSnapshot : ModelSnapshot
+    [Migration("20221219133215_CreateProduct")]
+    partial class CreateProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -388,9 +390,6 @@ namespace UnitedGlowHaven.Migrations
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("SubTotaal")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("WinkelmandId")
                         .HasColumnType("int");

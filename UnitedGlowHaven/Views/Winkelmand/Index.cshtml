@@ -33,7 +33,7 @@
         {
             <tr>
                 <td class="px-2">
-                    <img src="@product.Product.Afbeelding" alt="Card image cap" style="width: 3rem;" />
+                    <img src="/images/@product.Product.Afbeelding" alt="Card image cap" style="width: 3rem;" />
                 </td>
                 <td class="px-2">
                     @Html.DisplayFor(modelitem => product.Product.Naam)
@@ -47,6 +47,11 @@
                 <td class="px-2">
                     @Html.DisplayFor(modelitem => product.Product.Prijs)
                 </td>
+                <td class="px-2">
+                    @Html.DisplayFor(modelitem => product.SubTotaal)
+                </td>
+                <td><a class="button" asp-action="DeleteProductFromShoppingcart" asp-route-id="@product.WinkelmandProductId">Verwijderen</a></td>
+                  
             </tr>
         }
     </tbody>

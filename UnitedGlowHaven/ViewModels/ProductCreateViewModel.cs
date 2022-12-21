@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using UnitedGlowHaven.Models;
 
 namespace UnitedGlowHaven.ViewModels
@@ -13,5 +15,7 @@ namespace UnitedGlowHaven.ViewModels
         public int CategorieId { get; set; }
         public int KleurId { get; set; }
         public string ProductNummer { get; set; }
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
     }
 }
