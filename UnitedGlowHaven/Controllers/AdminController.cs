@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using UnitedGlowHaven.Data.UnitOfWork;
@@ -13,7 +18,14 @@ namespace UnitedGlowHaven.Controllers
     public class AdminController : Controller
     {
         private readonly IUnitOfWork _uow;
-        public AdminController(IUnitOfWork unitOfWork) { _uow = unitOfWork; }
+        private readonly IWebHostEnvironment _hostEnvironment;
+
+        public AdminController(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
+        {
+            _uow = unitOfWork;
+            _hostEnvironment = hostEnvironment; 
+        }
+
 
         public async Task<ActionResult<IEnumerable<Product>>> Producten()
         {
@@ -134,19 +146,29 @@ namespace UnitedGlowHaven.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ProductCreate(ProductCreateViewModel vm)
+        public async Task<ActionResult> ProductCreate([Bind("Naam", "Beschrijving", "Prijs", "ProductNummer", "KleurId", "CategorieId", "ImageFile")] ProductCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                string fileName = vm.ProductNummer;
+                string extension = Path.GetExtension(vm.ImageFile.FileName);
+                vm.Afbeelding = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(wwwRootPath + "/images/", fileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await vm.ImageFile.CopyToAsync(fileStream);
+                }
                 _uow.ProductRepository.Create(new Product()
                 {
                     Naam = vm.Naam,
                     Beschrijving = vm.Beschrijving,
                     Prijs = vm.Prijs,
-                    Afbeelding = vm.Afbeelding,
                     ProductNummer = vm.ProductNummer,
                     KleurId = vm.KleurId,
-                    CategorieId = vm.CategorieId
+                    CategorieId = vm.CategorieId,
+                    ImageFile = vm.ImageFile,
+                    Afbeelding = vm.Afbeelding,
                 });
                 await _uow.Save();
                 return RedirectToAction(nameof(Producten));
