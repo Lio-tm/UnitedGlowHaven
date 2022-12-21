@@ -1,0 +1,11 @@
+﻿@model UnitedGlowHaven.ViewModels.GebruikerDeleteViewModel
+@{
+    ViewData["Title"] = "Delete";
+}
+<p></p>
+<h4> Ben je zeker dat je @Model.Voornaam @Model.Achternaam wil verwijderen?</h4>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="GebruikerId" />
+    <input type="submit" value="Delete" class="btn btn-primary" />
+    <a asp-action="Index">Back to List</a>
+</form>
