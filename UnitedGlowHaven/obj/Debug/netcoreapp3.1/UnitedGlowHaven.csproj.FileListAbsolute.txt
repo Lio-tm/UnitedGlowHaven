@@ -213,3 +213,5 @@ C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp
 C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditProduct.cshtml.g.cs
 C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Winkelmand\Index.cshtml.g.cs
 C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Winkelmand\LegeWinkelmand.cshtml.g.cs
+C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Orders.cshtml.g.cs
+C:\Users\Lio\Desktop\WEBAPP\UnitedGlowHaven\UnitedGlowHaven\obj\Debug\netcoreapp3.1\Razor\Views\Admin\OrderDetails.cshtml.g.cs

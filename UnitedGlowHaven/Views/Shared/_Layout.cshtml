@@ -20,8 +20,8 @@
                     </a>
                 </div>
                 <div class="col align-self-center">
-                    <form role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <form asp-controller="Product" asp-action="Index" asp role="search">
+                        <input class="form-control me-2" type="text" name="SearchString" placeholder="Search" aria-label="Search">
                     </form>
                 </div>
                 <div class="col-1 d-flex align-items-center">
@@ -34,9 +34,10 @@
                 </div>
                 <div class="nav-item dropdown col-1 d-flex align-items-center">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Admin </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu bg-custom-lighter" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" asp-controller="Admin" asp-action="Producten">Producten</a>
                         <a class="dropdown-item" asp-controller="Gebruiker" asp-action="Index">Gebruikers</a>
+                        <a class="dropdown-item" asp-controller="Admin" asp-action="Orders">Orders</a>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,6 @@ namespace UnitedGlowHaven.Data.UnitOfWork
         IGenericRepository<Categorie> CategorieRepository { get; }
         IGenericRepository<Winkelmand> WinkelmandRepository { get; }
         IGenericRepository<WinkelmandProduct> WinkelmandProductRepository { get; }
-        IGenericRepository<ProductMaat> ProductMaatRepository { get; }
         Task Save();
     }
 }

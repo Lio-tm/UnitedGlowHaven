@@ -23,12 +23,11 @@
                 <input asp-for="ProductNummer" class="form-control" />
                 <span asp-validation-for="ProductNummer" class="text-danger"></span>
             </div>
-
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label asp-for="Beschrijving" class="control-label">@Html.DisplayNameFor(model => this.Model.Beschrijving)</label>
-                <textarea asp-for="Beschrijving" class="form-control" rows="5"></textarea>
+                <textarea asp-for="Beschrijving" class="form-control bg-custom-lighter" rows="5"></textarea>
                 <span asp-validation-for="Beschrijving" class="text-danger"></span>
             </div>
             <div class="form-group">

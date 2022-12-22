@@ -1,0 +1,60 @@
+﻿@model UnitedGlowHaven.ViewModels.WinkelmandViewModel
+@{
+    ViewData["Title"] = Model.WinkelmandId;
+}
+
+<h1 class="mt-5">Producten voor ordernummer: @ViewData["Title"]</h1>
+<table class="table table-bordered table-striped mt-5" style="width: 100%">
+    <thead class="px-2">
+        <tr>
+            <th class="px-2">
+                @Html.DisplayNameFor(v => v.WinkelmandProducten[0].Product.Naam)
+            </th>
+            <th class="px-2">
+                @Html.DisplayNameFor(v => v.WinkelmandProducten[0].Product.ProductNummer)
+            </th>
+            <th class="px-2">
+                @Html.DisplayNameFor(v => v.WinkelmandProducten[0].Aantal)
+            </th>
+            <th class="px-2">
+                @Html.DisplayNameFor(v => v.WinkelmandProducten[0].Product.Prijs)
+            </th>
+            <th class="px-2">
+                Totaal
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.WinkelmandProducten)
+        {
+            <tr>
+                <td class="px-2">
+                    @Html.DisplayFor(modelitem => product.Product.Naam)
+                </td>
+                <td class="px-2">
+                    @Html.DisplayFor(modelitem => product.Product.ProductNummer)
+                </td>
+                <td class="px-2">
+                    @Html.DisplayFor(modelitem => product.Aantal)
+                </td>
+                <td class="px-2">
+                    @Html.DisplayFor(modelitem => product.Product.Prijs)
+                </td>
+                <td class="px-2">
+                    @Html.DisplayFor(modelitem => product.SubTotaal)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+    
+</table>
+
+@*<table class="table table-bordered table-striped mt-5">
+    @foreach (var product in Model.WinkelmandProducten)
+    {
+        <div>@product.ProductId</div>
+    }
+    
+
+</table>*@

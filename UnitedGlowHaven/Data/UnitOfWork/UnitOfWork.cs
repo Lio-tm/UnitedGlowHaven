@@ -11,7 +11,6 @@ namespace UnitedGlowHaven.Data.UnitOfWork
         private IGenericRepository<Categorie> _categorieRepository;
         private IGenericRepository<Winkelmand> _winkelmandRepository;
         private IGenericRepository<WinkelmandProduct> _winkelmandProductRepository;
-        private IGenericRepository<ProductMaat> _productMaatRepository;
         public UnitOfWork(UnitedGlowHavenContext context)
         {
             _context = context;
@@ -61,18 +60,7 @@ namespace UnitedGlowHaven.Data.UnitOfWork
                 return _categorieRepository;
             }
         }
-        public IGenericRepository<ProductMaat> ProductMaatRepository
-        {
-            get
-            {
-                if (this._productMaatRepository == null)
-                {
-                    this._productMaatRepository = new GenericRepository<ProductMaat>(_context);
-                }
-                return _productMaatRepository;
-            }
-        }
-
+        
         public async Task Save()
         {
             await _context.SaveChangesAsync();
