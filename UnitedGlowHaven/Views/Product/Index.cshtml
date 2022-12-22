@@ -4,17 +4,18 @@
 
 <div class="container p-5 bg-custom-lighter">
     <div class="row">
-        <h3 class="custom-text-color mb-4">Meest Verkocht</h3>
+        <h3 class="custom-text-color mb-4">Producten</h3>
     </div>
     <div class="row">
         @foreach (var product in Model.Producten)
         {
             <div class="card bg-custom-lighter p-2" style="width: 16rem; height: 28rem;">
                 <a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId">
-                    <img class="card-img-top" src="~/images/tshirt.jpg" alt="Card image cap" style="height:20rem">
+                    <img class="card-img-top" src="~/images/@product.Afbeelding" alt="Card image cap" style="height:18rem">
                     <div class="card-body">
                         <ul class="list-group">
                             <li class="list-group-item bg-custom-lighter list-group-item-product">@product.Naam</li>
+                            <li class="list-group-item bg-custom-lighter list-group-item-product">@product.Maat.Naam</li>
                             <li class="list-group-item bg-custom-lighter list-group-item-product">@product.Prijs</li>
                         </ul>
                     </div>

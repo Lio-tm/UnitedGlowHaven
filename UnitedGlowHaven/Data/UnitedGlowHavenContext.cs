@@ -16,7 +16,6 @@ namespace UnitedGlowHaven.Data
         public DbSet<Kleur> Kleuren { get; set; }
         public DbSet<Maat> Maten { get; set; }
         public DbSet<Product> Producten { get; set; }
-        public DbSet<ProductMaat> ProductMaten { get; set; }
         public DbSet<Winkelmand> Winkelmand { get; set; }
         public DbSet<WinkelmandProduct> WinkelmandProducten { get; set; }
 
@@ -28,7 +27,6 @@ namespace UnitedGlowHaven.Data
             modelBuilder.Entity<Kleur>().ToTable("Kleur");
             modelBuilder.Entity<Maat>().ToTable("Maat");
             modelBuilder.Entity<Product>().ToTable("Product");
-            modelBuilder.Entity<ProductMaat>().ToTable("ProductMaat");
             modelBuilder.Entity<Winkelmand>().ToTable("Winkelmand");
             modelBuilder.Entity<WinkelmandProduct>().ToTable("WinkelmandProduct");
             modelBuilder.Entity<CustomUser>().ToTable("CustomUser");

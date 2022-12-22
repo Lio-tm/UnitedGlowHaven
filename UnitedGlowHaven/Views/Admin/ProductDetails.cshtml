@@ -1,7 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@model UnitedGlowHaven.ViewModels.ProductDetailsViewModel
+﻿@model UnitedGlowHaven.ViewModels.ProductDetailsViewModel
 @{
     ViewData["Title"] = Model.Naam;
 }
@@ -11,15 +8,27 @@
 <table class="table table-bordered table-striped mt-5">
     <tr>
         <td>@Html.DisplayNameFor(model => this.Model.ProductNummer)</td>
-        <td>@this.Model.ProductNummer</td>
+        <td>@Model.ProductNummer</td>
     </tr>
     <tr>
         <td>@Html.DisplayNameFor(model => this.Model.Naam)</td>
-        <td>@this.Model.Naam</td>
+        <td>@Model.Naam</td>
     </tr>
     <tr>
         <td>@Html.DisplayNameFor(model => this.Model.Beschrijving)</td>
-        <td>@this.Model.Beschrijving</td>
+        <td>@Model.Beschrijving</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => this.Model.Kleur)</td>
+        <td>@Model.Kleur.Naam</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => this.Model.Categorie)</td>
+        <td>@Model.Categorie.Naam</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => this.Model.Prijs)</td>
+        <td>@Model.Prijs</td>
     </tr>
     
 </table>
