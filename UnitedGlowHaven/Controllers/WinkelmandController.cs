@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +12,13 @@ using System.Threading.Tasks;
 using UnitedGlowHaven.Areas.Identity.Data;
 using UnitedGlowHaven.Data;
 using UnitedGlowHaven.Data.UnitOfWork;
+using UnitedGlowHaven.Migrations;
 using UnitedGlowHaven.Models;
 using UnitedGlowHaven.ViewModels;
 
 namespace UnitedGlowHaven.Controllers
 {
+    [Authorize]
     public class WinkelmandController : Controller
     {
         private readonly IUnitOfWork _uow;

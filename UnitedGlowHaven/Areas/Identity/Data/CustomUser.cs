@@ -15,7 +15,7 @@ namespace UnitedGlowHaven.Areas.Identity.Data
         [PersonalData]
         public int Huisnummer { get; set; }
         [PersonalData]
-        public string Postocde { get; set; }
+        public string Postcode { get; set; }
         [PersonalData]
         public string Gemeente { get; set; }
         public ICollection<Winkelmand> Winkelmand { get; set; }

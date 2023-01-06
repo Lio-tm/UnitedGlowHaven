@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.CodeAnalysis;
@@ -10,11 +11,13 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using UnitedGlowHaven.Data.UnitOfWork;
+using UnitedGlowHaven.Migrations;
 using UnitedGlowHaven.Models;
 using UnitedGlowHaven.ViewModels;
 
 namespace UnitedGlowHaven.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
         private readonly IUnitOfWork _uow;
@@ -233,6 +236,7 @@ namespace UnitedGlowHaven.Controllers
                     MaatId = vm.MaatId,
                     ImageFile = vm.ImageFile,
                     Afbeelding = vm.Afbeelding,
+
                 });
                 await _uow.Save();
                 return RedirectToAction(nameof(Producten));

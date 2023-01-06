@@ -32,14 +32,20 @@
                 <div class="col-1 d-flex align-items-center">
                         <partial name="_LoginPartial" />
                 </div>
-                <div class="nav-item dropdown col-1 d-flex align-items-center">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Admin </a>
-                    <div class="dropdown-menu bg-custom-lighter" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" asp-controller="Admin" asp-action="Producten">Producten</a>
-                        <a class="dropdown-item" asp-controller="Gebruiker" asp-action="Index">Gebruikers</a>
-                        <a class="dropdown-item" asp-controller="Admin" asp-action="Orders">Orders</a>
-                    </div>
-                </div>
+                @if(this.User.Identity.IsAuthenticated){
+                    @if (User.IsInRole("admin"))
+                    {
+                        <div class="nav-item dropdown col-1 d-flex align-items-center">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Admin </a>
+                            <div class="dropdown-menu bg-custom-lighter" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="Admin" asp-action="Producten">Producten</a>
+                                <a class="dropdown-item" asp-controller="Gebruiker" asp-action="Index">Gebruikers</a>
+                                <a class="dropdown-item" asp-controller="Admin" asp-action="Orders">Orders</a>
+                            </div>
+                        </div>
+                    }
+                }
+               
             </div>
         </div>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-custom bg-primary">
@@ -51,9 +57,6 @@
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="home" asp-action="Index">home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="about" asp-action="Index">over</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="categorie" asp-action="Index" asp-route-id=1>broeken</a>

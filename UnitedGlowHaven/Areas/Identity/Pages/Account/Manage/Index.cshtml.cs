@@ -47,7 +47,7 @@ namespace UnitedGlowHaven.Areas.Identity.Pages.Account.Manage
             [PersonalData]
             public int Huisnummer { get; set; }
             [PersonalData]
-            public string Postocde { get; set; }
+            public string Postcode { get; set; }
             [PersonalData]
             public string Gemeente { get; set; }
         }
@@ -60,7 +60,7 @@ namespace UnitedGlowHaven.Areas.Identity.Pages.Account.Manage
             var Achternaam = await Task.FromResult(user.Achternaam);
             var Straat = await Task.FromResult(user.Straat);
             var Huisnummer = await Task.FromResult(user.Huisnummer);
-            var Postcode = await Task.FromResult(user.Postocde);
+            var Postcode = await Task.FromResult(user.Postcode);
             var Gemeente = await Task.FromResult(user.Gemeente);
 
             Username = userName;
@@ -72,7 +72,7 @@ namespace UnitedGlowHaven.Areas.Identity.Pages.Account.Manage
                 Achternaam = Achternaam,
                 Straat = Straat,
                 Huisnummer = Huisnummer,
-                Postocde = Postcode,
+                Postcode = Postcode,
                 Gemeente = Gemeente
             };
         }
@@ -117,7 +117,7 @@ namespace UnitedGlowHaven.Areas.Identity.Pages.Account.Manage
             user.Achternaam = Input.Achternaam;
             user.Straat = Input.Straat;
             user.Huisnummer = Input.Huisnummer;
-            user.Postocde = Input.Postocde;
+            user.Postcode = Input.Postcode;
             user.Gemeente = Input.Gemeente;
 
             await _userManager.UpdateAsync(user);
