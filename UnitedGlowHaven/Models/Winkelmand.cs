@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using UnitedGlowHaven.Areas.Identity.Data;
 
 namespace UnitedGlowHaven.Models
@@ -11,6 +13,7 @@ namespace UnitedGlowHaven.Models
         [Required]
         public bool Afgerekend { get; set; }
         [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Totaal { get; set; }
         public string CustomUserId { get; set; }
         public CustomUser CustomUser { get; set; }

@@ -7,5 +7,7 @@ namespace UnitedGlowHaven.ViewModels
     {
         public string ProductSearch { get; set; }
         public List<Product> Producten { get; set; }
+        public List<Categorie> Categorie { get; set; }
+        public string CategorieNaam { get; set; }
     }
 }

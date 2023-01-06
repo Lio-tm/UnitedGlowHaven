@@ -20,13 +20,31 @@ namespace UnitedGlowHaven.Controllers
             _uow = unitOfWork;
         }
 
-        public async Task<ActionResult<IEnumerable<Product>>> Index()
+        public async Task<ActionResult<IEnumerable<Product>>> Index(string searchString)
         {
-            ProductListViewModel vm = new ProductListViewModel()
+            if (searchString == null)
             {
-                Producten = await _uow.ProductRepository.GetAll().ToListAsync()
-            };
-            return View(vm);
+                ProductListViewModel vm = new ProductListViewModel()
+                {
+                    Producten = await _uow.ProductRepository.GetAll()
+                    .Include(p => p.Maat)
+                    .ToListAsync()
+                };
+                return View(vm);
+            }
+            else
+            {
+                ProductListViewModel vm = new ProductListViewModel()
+                {
+                    Producten = await _uow.ProductRepository.GetAll()
+                    .Where(p => p.Naam.Contains(searchString) || p.ProductNummer.Contains(searchString) || p.Kleur.Naam.Contains(searchString))
+                    .Include(p => p.Maat)
+                    .ToListAsync()
+                };
+                return View(vm);
+            }
+           
+            
         }
 
         public async Task<ActionResult<IEnumerable<Product>>> Search(ProductListViewModel viewModel)
@@ -47,9 +65,10 @@ namespace UnitedGlowHaven.Controllers
             List<Product> producten = await _uow.ProductRepository.GetAll()
                 .Include(p => p.Kleur)
                 .Include(p => p.Categorie)
-                .Include(p => p.ProductMaten)
+                .Include(p => p.Maat)
                 .Where(p => p.ProductId == id)
                 .ToListAsync();
+               
 
             if (product != null)
             {
@@ -62,8 +81,8 @@ namespace UnitedGlowHaven.Controllers
                     Afbeelding = product.Afbeelding,
                     ProductNummer = product.ProductNummer,
                     Kleur = product.Kleur,
+                    Maat = product.Maat,
                     Categorie = product.Categorie,
-                    ProductMaten = product.ProductMaten,
                 };
                 return View(vm);
             }

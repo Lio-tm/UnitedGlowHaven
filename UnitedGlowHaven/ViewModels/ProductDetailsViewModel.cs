@@ -17,8 +17,8 @@ namespace UnitedGlowHaven.ViewModels
         public string Afbeelding { get; set; }
         public Kleur Kleur { get; set; }
         public Categorie Categorie { get; set; }
+        public Maat Maat { get; set; }
         
         public string ProductNummer { get; set; }
-        public ICollection<ProductMaat> ProductMaten { get; set; }
     }
 }

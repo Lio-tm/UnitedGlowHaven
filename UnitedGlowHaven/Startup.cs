@@ -31,7 +31,7 @@ namespace UnitedGlowHaven
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<UnitedGlowHavenContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalDBConnection")));
+            services.AddDbContext<UnitedGlowHavenContext>(options => options.UseSqlServer(Configuration.GetConnectionString("UGHConnection")));
             services.AddDefaultIdentity<CustomUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<UnitedGlowHavenContext>();
@@ -41,7 +41,7 @@ namespace UnitedGlowHaven
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -68,6 +68,25 @@ namespace UnitedGlowHaven
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            CreateRoles(serviceProvider).Wait();
+        }
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            UnitedGlowHavenContext context = serviceProvider.GetRequiredService<UnitedGlowHavenContext>();
+
+            IdentityResult result;
+
+            bool rolecheck = await roleManager.RoleExistsAsync("user");
+            if (!rolecheck)
+                result = await roleManager.CreateAsync(new IdentityRole("user"));
+
+            rolecheck = await roleManager.RoleExistsAsync("admin");
+            if (!rolecheck)
+                result = await roleManager.CreateAsync(new IdentityRole("admin"));
+
+            context.SaveChanges();
         }
     }
 }

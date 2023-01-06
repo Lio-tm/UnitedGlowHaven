@@ -1,0 +1,32 @@
+﻿@model UnitedGlowHaven.ViewModels.OrdersViewModel
+@{
+    ViewData["Title"] = "Admin - Orders";
+}
+<h1 class="mt-5">@ViewData["Title"]</h1>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Orders[0].WinkelmandId)</th>
+        <th>@Html.DisplayNameFor(model => model.Orders[0].CustomUserId)</th>
+        <th></th>
+        <th></th>
+
+    </tr>
+    @foreach (var order in Model.Orders)
+    {
+        <tr>
+            <td>@order.WinkelmandId</td>
+            <td>@order.CustomUserId</td>
+            <td><a class="button" asp-action="OrderDetails" asp-route-id="@order.WinkelmandId">Details</a></td>
+            <td><a class="button" asp-action="DeleteOrder" asp-route-id="@order.WinkelmandId">Verwijderen</a></td>
+            @*@if (this.User.Identity.IsAuthenticated)
+        {
+        @if (User.IsInRole("admin"))
+        {
+        <td><a class="button" asp-action="DeleteDonut" asp-route-id="@product.ProductId">Verwijderen</a></td>
+        }
+        }*@
+        </tr>
+    }
+</table>
+

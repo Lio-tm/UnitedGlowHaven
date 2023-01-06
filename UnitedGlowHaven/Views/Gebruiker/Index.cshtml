@@ -4,9 +4,20 @@
 }
 
 <h2>Gebruikers</h2>
-<p>
-    <a asp-action="Create"> Klik hier om een nieuwe gebruiker aan te maken</a>
-</p>
+<div>
+    <form class="mt-5" asp-action="Create" method="get">
+        <div class="form-group">
+            <input type="submit" value="Nieuwe Gebruiker" class="my-button btn btn-primary" />
+        </div>
+    </form>
+    <form class="mt-5" asp-action="GrantPermissions" method="get">
+        <div class="form-group">
+            <input type="submit" value="Rollen" class="my-button btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+
 
 <table>
     <thead>
@@ -35,7 +46,9 @@
                 </td>
 
                 <td class="col-md-4">
+                    <a asp-action="Details" asp-route-id="@gebruiker.Id">
                     @Html.DisplayFor(modelitem => gebruiker.Email)
+                    </a>
                 </td>
                 <td class="col-md-4">
                     <a asp-action="Edit" asp-route-id="@gebruiker.Id">Wijzigen</a>

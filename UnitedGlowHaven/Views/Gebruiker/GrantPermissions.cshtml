@@ -1,0 +1,17 @@
+﻿@model UnitedGlowHaven.ViewModels.GrantPermissionsViewModel
+@{
+    ViewData["Title"] = "Grant Permissions";
+}
+
+<form asp-action="GrantPermissions" asp-method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <select asp-for="GebruikerId" asp-items="Model.Gebruikers"></select>
+    </div>
+    <div>
+        <select asp-for="RolId" asp-items="Model.Rollen"></select>
+    </div>
+    <div>
+        <input type="submit" value="Create" class="btn btn-primary"/>
+    </div>
+</form>

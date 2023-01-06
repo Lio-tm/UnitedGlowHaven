@@ -1,0 +1,17 @@
+﻿@model UnitedGlowHaven.ViewModels.GebruikerDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+<h1>Gebruiker details</h1>
+
+<h2>@Model.Voornaam @Model.Achternaam</h2>
+
+<p>
+    Id: @Model.GebruikerId
+</p>
+<p>
+    Email: @Model.Email
+</p>
+
+@Html.ActionLink("Terug", "Index", "Gebruiker")
