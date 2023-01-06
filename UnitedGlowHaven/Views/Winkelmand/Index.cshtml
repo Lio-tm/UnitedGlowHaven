@@ -5,8 +5,8 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<table class="bg-custom-lighter">
-    <thead>
+<table class="table bg-custom-lighter" style="width: 100%">
+    <thead class="px-2">
         <tr>
             <th class="px-2">
                 @Html.DisplayNameFor(v => v.WinkelmandProducten[0].Product.Afbeelding)
@@ -55,6 +55,19 @@
             </tr>
         }
     </tbody>
+    <tfoot>
+        <tr>
+            <td class="px-2">TOTAAL</td>
+            <td class="px-2"></td>
+            <td class="px-2"></td>
+            <td class="px-2"></td>
+            <td class="px-2"></td>
+            <td class="px-2">
+                @Model.Totaal
+            </td>
+            <td><a class="btn btn-primary" asp-action="Afrekenen" asp-route-id="@Model.WinkelmandId">Afrekenen</a></td>
+        </tr>
+    </tfoot>
 </table>
 
    

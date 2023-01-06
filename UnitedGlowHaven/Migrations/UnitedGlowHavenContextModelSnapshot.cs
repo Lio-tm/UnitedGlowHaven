@@ -205,7 +205,7 @@ namespace UnitedGlowHaven.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Postocde")
+                    b.Property<string>("Postcode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
@@ -305,6 +305,9 @@ namespace UnitedGlowHaven.Migrations
                     b.Property<int>("KleurId")
                         .HasColumnType("int");
 
+                    b.Property<int>("MaatId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Naam")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -322,32 +325,9 @@ namespace UnitedGlowHaven.Migrations
 
                     b.HasIndex("KleurId");
 
-                    b.ToTable("Product");
-                });
-
-            modelBuilder.Entity("UnitedGlowHaven.Models.ProductMaat", b =>
-                {
-                    b.Property<int>("ProductMaatId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Aantal")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MaatId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductMaatId");
-
                     b.HasIndex("MaatId");
 
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductMaat");
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("UnitedGlowHaven.Models.Winkelmand", b =>
@@ -468,19 +448,10 @@ namespace UnitedGlowHaven.Migrations
                         .HasForeignKey("KleurId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("UnitedGlowHaven.Models.ProductMaat", b =>
-                {
                     b.HasOne("UnitedGlowHaven.Models.Maat", "Maat")
-                        .WithMany("ProductMaten")
+                        .WithMany("Producten")
                         .HasForeignKey("MaatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("UnitedGlowHaven.Models.Product", "Product")
-                        .WithMany("ProductMaten")
-                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +12,13 @@ using System.Threading.Tasks;
 using UnitedGlowHaven.Areas.Identity.Data;
 using UnitedGlowHaven.Data;
 using UnitedGlowHaven.Data.UnitOfWork;
+using UnitedGlowHaven.Migrations;
 using UnitedGlowHaven.Models;
 using UnitedGlowHaven.ViewModels;
 
 namespace UnitedGlowHaven.Controllers
 {
+    [Authorize]
     public class WinkelmandController : Controller
     {
         private readonly IUnitOfWork _uow;
@@ -43,13 +46,19 @@ namespace UnitedGlowHaven.Controllers
             .Where(w => w.WinkelmandId == winkelmand.WinkelmandId)
             .ToListAsync();
 
-            if (winkelmandProducten != null)
+            if (winkelmandProducten.Count > 0)
             {
                 WinkelmandViewModel vm = new WinkelmandViewModel()
                 {
                     WinkelmandId = winkelmand.WinkelmandId,
                     WinkelmandProducten = winkelmandProducten,
                 };
+                foreach (var item in winkelmand.WinkelmandProducten)
+                {
+                    vm.Totaal += item.SubTotaal;
+                }
+                _uow.WinkelmandRepository.Update(winkelmand);
+
                 return View(vm);
             }
 
@@ -66,19 +75,22 @@ namespace UnitedGlowHaven.Controllers
             CustomUser user = await _userManager.GetUserAsync(HttpContext.User);
             Winkelmand winkelmand = await _context.Winkelmand.Where(w => w.CustomUserId == user.Id && w.Afgerekend == false).FirstOrDefaultAsync();
             Product product = await _uow.ProductRepository.GetById(vm.ProductId);
-            WinkelmandProduct winkelmandProduct = await _context.WinkelmandProducten.Where(w => w.ProductId == product.ProductId && w.WinkelmandId == winkelmand.WinkelmandId).FirstOrDefaultAsync();
-            
+            WinkelmandProduct winkelmandProduct = null;
+
 
             if (winkelmand == null)
             {
                 winkelmand = new Winkelmand()
                 {
-                    Totaal = 0,
                     CustomUserId = user.Id,
                     Afgerekend = false
                 };
                 _uow.WinkelmandRepository.Create(winkelmand);
                 await _uow.Save();
+            }
+            else
+            {
+                winkelmandProduct = await _context.WinkelmandProducten.Where(w => w.ProductId == product.ProductId && w.WinkelmandId == winkelmand.WinkelmandId).FirstOrDefaultAsync();
             }
             if (winkelmandProduct == null)
             {
@@ -98,23 +110,42 @@ namespace UnitedGlowHaven.Controllers
                 winkelmandProduct.Aantal += 1;
                 winkelmandProduct.SubTotaal = product.Prijs * winkelmandProduct.Aantal;
                 _uow.WinkelmandProductRepository.Update(winkelmandProduct);
+                
             }
+
+           
             await _uow.Save();
-            winkelmand.Totaal += winkelmandProduct.SubTotaal;
+
+            
+
             return RedirectToAction(nameof(Index));
         }
 
         public async Task<ActionResult> DeleteProductFromShoppingcart(int id)
         {
+            CustomUser user = await _userManager.GetUserAsync(HttpContext.User);
             WinkelmandProduct winkelmandProduct = await _uow.WinkelmandProductRepository.GetById(id);
+            Winkelmand winkelmand = await _context.Winkelmand.Where(w => w.CustomUserId == user.Id && w.Afgerekend == false).FirstOrDefaultAsync();
 
             if (winkelmandProduct == null) return NotFound();
 
             _uow.WinkelmandProductRepository.Delete(winkelmandProduct);
             await _uow.Save();
 
-            return RedirectToAction("Index");
+
+            return RedirectToAction(nameof(Index));
         }
 
+        public async Task<ActionResult> Afrekenen(int id)
+        {
+            CustomUser user = await _userManager.GetUserAsync(HttpContext.User);
+            Winkelmand winkelmand = await _uow.WinkelmandRepository.GetById(id);
+            winkelmand.Afgerekend = true;
+            
+            _uow.WinkelmandRepository.Update(winkelmand);
+            await _uow.Save();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

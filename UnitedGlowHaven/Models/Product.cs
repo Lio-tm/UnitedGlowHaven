@@ -26,9 +26,11 @@ namespace UnitedGlowHaven.Models
         
         [Required]
         public int CategorieId { get; set; }
+        [Required]
+        public int MaatId { get; set; }
         public Categorie Categorie { get; set; }
         public Kleur Kleur { get; set; }
-        public ICollection<ProductMaat> ProductMaten { get; set; }
+        public Maat Maat { get; set; }
         public ICollection<WinkelmandProduct> WinkelmandProducten { get; set; }
         [NotMapped]
 

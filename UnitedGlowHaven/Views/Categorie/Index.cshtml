@@ -1,8 +1,10 @@
 ﻿@model UnitedGlowHaven.ViewModels.ProductListViewModel;
-
+@{
+    ViewData["Title"] = Model.Categorie;
+}
 
 <div class="container p-5 bg-custom-lighter">
-    <h3>ALLES</h3>
+    <h3>PRODUCTEN</h3>
     <div class="row">
         
         @if (Model.Producten.Count <= 0)
@@ -13,10 +15,11 @@
         {
             <div class="card bg-custom-lighter p-2" style="width: 16rem; height: 28rem;">
                 <a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId">
-                    <img class="card-img-top" src="@product.Afbeelding" alt="Card image cap" style="height:20rem">
+                    <img class="card-img-top" src="~/images/@product.Afbeelding" alt="Card image cap" style="height:18rem">
                     <div class="card-body">
                         <ul class="list-group">
                             <li class="list-group-item bg-custom-lighter list-group-item-product">@product.Naam</li>
+                            <li class="list-group-item bg-custom-lighter list-group-item-product">@product.Maat.Naam</li>
                             <li class="list-group-item bg-custom-lighter list-group-item-product">@product.Prijs</li>
                         </ul>
                     </div>

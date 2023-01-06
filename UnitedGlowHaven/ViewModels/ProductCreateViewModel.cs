@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,6 +15,7 @@ namespace UnitedGlowHaven.ViewModels
         public string Afbeelding { get; set; }        
         public int CategorieId { get; set; }
         public int KleurId { get; set; }
+        public int MaatId { get; set; }
         public string ProductNummer { get; set; }
         [NotMapped]
         public IFormFile ImageFile { get; set; }

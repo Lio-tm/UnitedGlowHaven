@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.CodeAnalysis;
@@ -10,11 +11,13 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using UnitedGlowHaven.Data.UnitOfWork;
+using UnitedGlowHaven.Migrations;
 using UnitedGlowHaven.Models;
 using UnitedGlowHaven.ViewModels;
 
 namespace UnitedGlowHaven.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
         private readonly IUnitOfWork _uow;
@@ -35,10 +38,24 @@ namespace UnitedGlowHaven.Controllers
             };
             return View(vm);
         }
+
+        public async Task<ActionResult<IEnumerable<Product>>> Orders()
+        {
+            OrdersViewModel vm = new OrdersViewModel()
+            {
+                Orders = await _uow.WinkelmandRepository.GetAll()
+                .Where(o => o.Afgerekend == true)
+                .ToListAsync()
+            };
+            return View(vm);
+        }
         public async Task<ActionResult<IEnumerable<Product>>> ProductDetails(int id)
         {
             var product = await _uow.ProductRepository.GetById(id);
             List<Product> producten = await _uow.ProductRepository.GetAll()
+                .Include(p => p.Kleur)
+                .Include(p => p.Categorie)
+                .Include(p => p.Maat)
                 .Where(p => p.ProductId == id)
                 .ToListAsync();
 
@@ -51,7 +68,10 @@ namespace UnitedGlowHaven.Controllers
                     Beschrijving = product.Beschrijving,
                     Prijs = product.Prijs,
                     Afbeelding = product.Afbeelding,
-                    ProductNummer = product.ProductNummer
+                    ProductNummer = product.ProductNummer,
+                    Kleur = product.Kleur,
+                    Categorie = product.Categorie,
+                    Maat = product.Maat,
                 };
                 return View(vm);
             }
@@ -63,6 +83,49 @@ namespace UnitedGlowHaven.Controllers
                 };
                 return View("Index", vm);
             }
+        }
+        public async Task<ActionResult<IEnumerable<Product>>> OrderDetails(int id)
+        {
+            var order = await _uow.WinkelmandRepository.GetById(id);
+            List<Winkelmand> orders = await _uow.WinkelmandRepository.GetAll()
+                .Where(p => p.WinkelmandId == id)
+                .Include(p => p.WinkelmandProducten)
+                .ToListAsync();
+
+            List<WinkelmandProduct> winkelmandProducten = await _uow.WinkelmandProductRepository.GetAll()
+           .Include(w => w.Product)
+           .Where(w => w.WinkelmandId == id)
+           .ToListAsync();
+
+            if (order != null)
+            {
+                WinkelmandViewModel vm = new WinkelmandViewModel()
+                {
+                    WinkelmandId = order.WinkelmandId,
+                    WinkelmandProducten = winkelmandProducten,
+                    CustomUserId = order.CustomUserId
+                };
+                return View(vm);
+            }
+            else
+            {
+                ProductListViewModel vm = new ProductListViewModel()
+                {
+                    Producten = await _uow.ProductRepository.GetAll().ToListAsync()
+                };
+                return View(vm);
+            }
+        }
+        [HttpGet]
+        public async Task<ActionResult<Winkelmand>> DeleteOrder(int id)
+        {
+            Winkelmand winkelmand = await _uow.WinkelmandRepository.GetById(id);
+            if (winkelmand == null) return NotFound();
+
+            _uow.WinkelmandRepository.Delete(winkelmand);
+            await _uow.Save();
+
+            return RedirectToAction("Orders");
         }
 
         [HttpGet]
@@ -78,7 +141,10 @@ namespace UnitedGlowHaven.Controllers
                 Beschrijving = product.Beschrijving,
                 Prijs = product.Prijs,
                 Afbeelding = product.Afbeelding,
-                ProductNummer = product.ProductNummer
+                ProductNummer = product.ProductNummer,
+                Kleur = product.Kleur,
+                Categorie = product.Categorie,
+                Maat = product.Maat
 
             };
 
@@ -146,7 +212,7 @@ namespace UnitedGlowHaven.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ProductCreate([Bind("Naam", "Beschrijving", "Prijs", "ProductNummer", "KleurId", "CategorieId", "ImageFile")] ProductCreateViewModel vm)
+        public async Task<ActionResult> ProductCreate([Bind("Naam", "Beschrijving", "Prijs", "ProductNummer", "KleurId", "CategorieId", "MaatId", "ImageFile")] ProductCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
@@ -167,8 +233,10 @@ namespace UnitedGlowHaven.Controllers
                     ProductNummer = vm.ProductNummer,
                     KleurId = vm.KleurId,
                     CategorieId = vm.CategorieId,
+                    MaatId = vm.MaatId,
                     ImageFile = vm.ImageFile,
                     Afbeelding = vm.Afbeelding,
+
                 });
                 await _uow.Save();
                 return RedirectToAction(nameof(Producten));
